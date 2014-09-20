@@ -40,6 +40,10 @@ function Template(){
 		return data;
 	}
 	
+	this.getTemplateDir = function(){
+		return templateDir;
+	}
+	
 	/////INIT//////
 	loadTemplates();	
 }

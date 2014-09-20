@@ -1,4 +1,4 @@
-
+var WebSocketServer = require('ws').Server;
 
 function Reloader(){
 	var reloadSockets= new Array();
