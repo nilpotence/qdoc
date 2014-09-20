@@ -2,7 +2,7 @@
   "name": "qdoc",
   "version": "1.0.0",
   "description": "Quick Whatever-to-HTML doc generator",
-  "main": "qdoc.js",
+  "main": "src/qdoc.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
