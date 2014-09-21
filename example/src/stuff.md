@@ -1,7 +1,8 @@
 # Markdown document
 
 * This is a list item
-* Here is another on
+* Here is another item
+
 
     function someCodeSnippet(var foo){
     	var bar = 5;

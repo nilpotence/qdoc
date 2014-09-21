@@ -1,13 +1,14 @@
 var path = require('path');
 var os = require('os');
 var util = require('util');
+var open = require('open');
 
 var Builder = require('./builder');
 var Watcher = require('./watcher');
 var Template = require('./template');
 var Common = require('./common');
 var Reloader = require('./reloader');
-
+var Explorer = require('./editor/explorer');
 
 var targetDir;
 if(process.argv[2]){
@@ -44,11 +45,14 @@ watcher.on('fileDeleted', function(filename){
 
 builder.make("src");
 
-builder.copy(path.join(__dirname,"autoreload.js"));
+builder.copy(path.join(__dirname,"_autoreload.js"));
 
 reloader.start();
 watcher.start();
 
+var explorer = new Explorer(targetDir);
+explorer.start();
 
+open(path.join(__dirname,'editor/client/viewer.html'));
 
 console.log('qdoc started !');

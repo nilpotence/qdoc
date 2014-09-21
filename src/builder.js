@@ -164,7 +164,7 @@ function Builder(targetDir){
 		
 		if(template.getTemplateDir() !== ''){
 			cb_count++;
-			that.copy(path.join(template.getTemplateDir(), 'res'),true, end_cb);
+			that.copy(path.join(template.getTemplateDir(), '_res'),true, end_cb);
 		}
 		
 		walker.on('end', function(){
