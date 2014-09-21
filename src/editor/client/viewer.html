@@ -11,6 +11,17 @@
 		
 		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<script type="text/javascript" src="explorer.js"></script>
+		<script type="text/javascript" src="editor.js"></script>
+		
+		<script>
+			$('document').ready(function(){
+				var editor = new qdoc.editor();
+				qdoc.explorer(function(filename){
+					editor.setCurrentFile(filename);
+				});
+			})
+		
+		</script>
 		
 	</head>
 	<body>
@@ -23,6 +34,12 @@
 		<div id="viewer">
 			<iframe>
 			</iframe>
+		</div>
+		<div id="editor">
+			<h1>Edit</h1>
+			<div id="editor-content">
+				
+			</div>
 		</div>
 	</body>
 </html>

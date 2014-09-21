@@ -1,6 +1,8 @@
 window.WebSocket = window.WebSocket || window.MozWebSocket;
 
-$('document').ready(function(){
+if(!qdoc) var qdoc = {};
+
+qdoc.explorer = function(open_cb){
 	
 	var socket;
 	var files = {};
@@ -32,13 +34,32 @@ $('document').ready(function(){
 	}
 	
 	function open(file){
-		openURL(currentDir+'/'+file);
+		var o = currentDir+'/'+file;
+		openURL(o);
+		if(open_cb) open_cb(o);
 	}
 	
 	///////////////DISPLAY/////////////////
-	var explorerDiv = $('#explorer-content');
+	var explorerDiv = $('#explorer');
+	var explorerContentDiv = $('#explorer-content');
 	var viewerFrame = $('#viewer iframe');
 	var explorerURL = $('#explorer h2');
+	
+	
+	var HOVER_THRESHOLD = 50;
+	var hoverTimestamp = 0;
+	explorerDiv.hover(function(evt){
+		if( (new Date().getTime()) - hoverTimestamp > HOVER_THRESHOLD){
+			explorerDiv.addClass('open');
+			hoverTimestamp = new Date().getTime();
+		}
+	},
+	function(zvt){
+		if( (new Date().getTime()) - hoverTimestamp > HOVER_THRESHOLD){
+			explorerDiv.removeClass('open');
+			hoverTimestamp = new Date().getTime();
+		}
+	});
 	
 	function openURL(url){
 		viewerFrame.attr('src', url);
@@ -63,7 +84,7 @@ $('document').ready(function(){
 	}
 	
 	function cleanDisplay(){
-		explorerDiv.empty();
+		explorerContentDiv.empty();
 		explorerURL.empty();
 	}
 	
@@ -83,7 +104,7 @@ $('document').ready(function(){
 			onFileClicked(file);
 		});
 		
-		explorerDiv.append(item);
+		explorerContentDiv.append(item);
 	}
 	///////////////////////////////////////
 	
@@ -117,5 +138,5 @@ $('document').ready(function(){
 	//////////////////////////////////////
 	
 	connect();
-});
+};
 
