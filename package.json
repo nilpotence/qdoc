@@ -15,5 +15,9 @@
     "node-watch": "^0.3.4",
     "open": "0.0.5",
     "ws": "^0.4.32"
+  },
+  "preferGlobal":"true",
+  "bin":{
+	  "qdoc":"src/qdoc.js"
   }
 }

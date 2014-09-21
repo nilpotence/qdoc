@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 var path = require('path');
 var os = require('os');
 var util = require('util');
@@ -9,6 +11,8 @@ var Template = require('./template');
 var Common = require('./common');
 var Reloader = require('./reloader');
 var Explorer = require('./editor/explorer');
+
+process.title = 'qdoc';
 
 var targetDir;
 if(process.argv[2]){
