@@ -11,6 +11,7 @@ var Template = require('./template');
 var Common = require('./common');
 var Reloader = require('./reloader');
 var Explorer = require('./editor/explorer');
+var FileServer = require('./fileserver');
 
 process.title = 'qdoc';
 
@@ -46,17 +47,25 @@ watcher.on('fileDeleted', function(filename){
 	reloader.reload();
 });
 
+var explorer, fileserver;
 
-builder.make("src");
+builder.make("src",function(){
 
-builder.copy(path.join(__dirname,"_autoreload.js"));
+	builder.copy(path.join(__dirname,"_autoreload.js"));
+	builder.copy(path.join(__dirname,"editor/_client"), true);	
+	
+	fileserver = new FileServer(targetDir);
+	fileserver.start();
+	
+	reloader.start(fileserver.getHTTPServer());
+	watcher.start();
+	explorer = new Explorer(targetDir);
+	explorer.start(fileserver.getHTTPServer());
+	console.log('qdoc started !');
+	
+	
 
-reloader.start();
-watcher.start();
+	//open(path.join(__dirname,'http://localhost:8080/_client/viewer.html'));
+});
 
-var explorer = new Explorer(targetDir);
-explorer.start();
 
-open(path.join(__dirname,'editor/client/viewer.html'));
-
-console.log('qdoc started !');

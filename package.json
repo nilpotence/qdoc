@@ -1,6 +1,6 @@
 {
   "name": "qdoc",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "description": "Quick Whatever-to-HTML doc generator",
   "main": "src/qdoc.js",
   "scripts": {
@@ -9,15 +9,17 @@
   "author": "Sylvain Mahé",
   "license": "MIT",
   "dependencies": {
+    "connect": "^3.2.0",
     "dot": "^1.0.2",
     "fs.extra": "^1.2.1",
     "marked": "^0.3.2",
     "node-watch": "^0.3.4",
     "open": "0.0.5",
+    "serve-static": "^1.6.2",
     "ws": "^0.4.32"
   },
-  "preferGlobal":"true",
-  "bin":{
-	  "qdoc":"src/qdoc.js"
+  "preferGlobal": "true",
+  "bin": {
+    "qdoc": "src/qdoc.js"
   }
 }

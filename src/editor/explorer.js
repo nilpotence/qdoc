@@ -18,6 +18,7 @@ function Explorer(root){
 	
 	
 	function getFiles(dir, callback){
+		dir = path.join(root,dir);
 		fs.readdir(dir, function(err, files){
 			if(err) console.log("Can't list files in "+dir+"!");
 			else{
@@ -25,11 +26,13 @@ function Explorer(root){
 				for(var i=0; i<files.length;i++){
 					var desc = {name: files[i]};
 					var stat = fs.statSync(path.join(dir,desc.name));
+					
 					if(stat.isDirectory()){
 						desc.type = 'dir';
 					}else{
 						desc.type = 'file';
 					}
+					
 					filesDesc.push(desc);
 				}
 			
@@ -45,7 +48,7 @@ function Explorer(root){
 		
 		getFiles(socketHandler.dir, function(files){
 			if(files){
-				socketHandler.socket.send(JSON.stringify({files: files, currentDir: path.resolve(socketHandler.dir)}));
+				socketHandler.socket.send(JSON.stringify({files: files, currentDir: socketHandler.dir}));
 			}	
 		});
 	}
@@ -61,7 +64,7 @@ function Explorer(root){
 	}
 	
 	function addClient(socket){
-		socketHandler = {socket: socket, dir: root}; 
+		socketHandler = {socket: socket, dir: ''}; 
 		socketHandlers.push(socketHandler);
 		
 		socket.on('message', function(message){
@@ -76,11 +79,11 @@ function Explorer(root){
 	
 	
 	//////////////////////////////////////
-	this.start = function(){
+	this.start = function(server){
 		
 		console.log('Starting explorer ws server...');
 		
-		var ws = new WebSocketServer({port:9876});
+		var ws = new WebSocketServer({port:8765});
 		ws.on('connection', function(socket){
 			addClient(socket);
 		});

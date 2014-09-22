@@ -110,7 +110,7 @@ qdoc.explorer = function(open_cb){
 	
 	///////////////SOCKET//////////////////
 	function connect(){
-		socket = new WebSocket("ws://localhost:9876");
+		socket = new WebSocket("ws://"+window.location.hostname+":8765");
 		
 		socket.onmessage = function(message){
 			console.log("message received : "+message.data)

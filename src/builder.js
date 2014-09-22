@@ -79,7 +79,7 @@ function Builder(targetDir){
 		fs.exists(tgName,function(exists){
 			if(exists) return ;
 			
-			console.log("Copying "+filename+" to "+targetDir+"...");
+			console.log("Copying "+filename+" to "+tgName+"...");
 			
 			if(recursive)
 				fs.copyRecursive(filename, tgName, callback);
@@ -137,39 +137,25 @@ function Builder(targetDir){
 	this.make = function(srcDir, callback){
 		var walker = fs.walk(srcDir);
 		
-		var cb_count = 0;
-		function end_cb(){
-			cb_count--;
-			is_done();
-		}
-		function is_done(){
-			if(cb_count === -1 && callback) callback();
-		}
-		
 		walker.on('directory', function(root, stat, next){
 			var dirname = root+path.sep+stat.name;
 			var file = that.processSourceFilename(that.targetDir, dirname);		
-			cb_count++;
-			that.buildTargetDirectory(file, end_cb);
-			next();
+			that.buildTargetDirectory(file, false, next);
 		});
 		
 		walker.on('file', function(root, stat, next){
 			var filename = root+path.sep+stat.name;
 			var file = that.processSourceFilename(that.targetDir, filename);
-			cb_count++;
-			that.buildTargetFile(file,end_cb);
-			next();
+			that.buildTargetFile(file,next);
+			
 		});
-		
-		if(template.getTemplateDir() !== ''){
-			cb_count++;
-			that.copy(path.join(template.getTemplateDir(), '_res'),true, end_cb);
-		}
-		
+
 		walker.on('end', function(){
-			cb_count--;
-			is_done();
+			if(template.getTemplateDir() !== ''){
+				that.copy(path.join(template.getTemplateDir(), '_res'),true, function(){
+					if(callback)callback();
+				});
+			}
 		});
 	}
 	
