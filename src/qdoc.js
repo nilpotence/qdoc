@@ -57,10 +57,10 @@ builder.make("src",function(){
 	fileserver = new FileServer(targetDir);
 	fileserver.start();
 	
-	reloader.start(fileserver.getHTTPServer());
+	reloader.start();
 	watcher.start();
 	explorer = new Explorer(targetDir);
-	explorer.start(fileserver.getHTTPServer());
+	explorer.start();
 	console.log('qdoc started !');
 	
 	

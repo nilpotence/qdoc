@@ -12,7 +12,6 @@ function Reloader(){
 
 	this.start = function(){
 		
-		return ;
 		var ws = new WebSocketServer({port:9876});
 		ws.on('connection', function(socket){
 			reloadSockets.push(socket);
