@@ -115,7 +115,7 @@ body{
 }
 
 #viewer iframe{
-	width: 100%;
+	width: 95vw;
 	height: 100vh;
 	background: white;
 	border: 0px;
