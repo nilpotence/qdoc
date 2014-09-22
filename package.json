@@ -1,6 +1,6 @@
 {
   "name": "qdoc",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Quick Whatever-to-HTML doc generator",
   "main": "src/qdoc.js",
   "scripts": {

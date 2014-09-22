@@ -65,7 +65,7 @@ builder.make("src",function(){
 	
 	
 
-	//open(path.join(__dirname,'http://localhost:8080/_client/viewer.html'));
+	open('http://localhost:8080/_client/viewer.html');
 });
 
 
