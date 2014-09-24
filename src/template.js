@@ -35,7 +35,7 @@ function Template(){
 		if(file.target.ext != 'html')
 			return data;
 		
-		data = templateFunc({content: data, path: path.resolve(targetDir)});
+		data = templateFunc({content: data, path: targetDir});
 		
 		return data;
 	}

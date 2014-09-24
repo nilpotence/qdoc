@@ -94,12 +94,16 @@ function Builder(targetDir){
 		
 		console.log("Building "+file.target.name+" from "+file.src.name+"...");
 		
+		var relativePath = path.relative(file.target.name, that.targetDir);
+		relativePath = relativePath.substr(1);
+		console.log(relativePath);
+		
 		var map = mapping[file.src.ext];
 		if(map){
 			map.conv(file, function(err, data){
 				if(err) console.log("Can't convert "+file.src.name +" !");
 				else{
-					data = template.apply(file, data, that.targetDir);
+					data = template.apply(file, data, relativePath);
 					writeTarget(file, data, callback);
 				}
 					
