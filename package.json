@@ -1,6 +1,6 @@
 {
   "name": "qdoc",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Quick Whatever-to-HTML doc generator",
   "main": "src/qdoc.js",
   "scripts": {
@@ -12,6 +12,7 @@
     "connect": "^3.2.0",
     "dot": "^1.0.2",
     "fs.extra": "^1.2.1",
+    "kramed": "^0.4.3",
     "marked": "^0.3.2",
     "node-watch": "^0.3.4",
     "open": "0.0.5",
